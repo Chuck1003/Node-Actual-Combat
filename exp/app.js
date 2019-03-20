@@ -21,10 +21,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(reidsClient);   //中间件需要在路由之前进去，顺序执行！
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-app.use(reidsClient)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

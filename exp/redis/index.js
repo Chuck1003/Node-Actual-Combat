@@ -1,44 +1,42 @@
 let redis = require('redis');
+let client = redis.createClient(6379, '127.0.0.1');
 
-let redisClient = function(req, res, next) {
-        // let client = redis.createClient(8090, '127.0.0.1');
-        // client.on('error', (err)=> {
-        //     console.warn('Error: ', err);
-        // })
 
-        // client.set('color', 'red', redis.print);
-        // client.get('color', function(err, value) {
-        // if (err) throw err;
-        // console.log('Got: ' + value);
-        // });
+module.exports = function(req, res, next) {
+    client.on('error', (err)=> {
+        console.warn('RedisError: ', err);
+    })
 
-        // client.hmset('camping', {
-        //     'shelter': '2-person tent',
-        //     'cooking': 'campstove'
-        // }, redis.print);
+    client.set('color', 'red', redis.print);
+    client.get('color', function(err, value) {
+    if (err) throw err;
+    console.log('Got: ' + value);
+    });
 
-        // client.hget('camping', 'cooking', function(err, value) {
-        //     if (err) throw err;
-        //     console.log('Will be cooking with: ' + value);
-        // });
+    client.hmset('camping', {
+        'shelter': '2-person tent',
+        'cooking': 'campstove'
+    }, redis.print);
 
-        // client.hkeys('camping', function(err, keys) {
-        //     if (err) throw err;
-        //     keys.forEach(function(key, i) {
-        //         console.log(' ' + key);
-        //     });
-        // });
+    client.hget('camping', 'cooking', function(err, value) {
+        if (err) throw err;
+        console.log('Will be cooking with: ' + value);
+    });
 
-        // client.lpush('tasks', 'Paint the bikeshed red.', redis.print);
-        // client.lpush('tasks', 'Paint the bikeshed green.', redis.print);
+    client.hkeys('camping', function(err, keys) {
+        if (err) throw err;
+        keys.forEach(function(key, i) {
+            console.log(' ' + key);
+        });
+    });
 
-        // client.lrange('tasks', 0, -1, function(err, items) {
-        // if (err) throw err; items.forEach(function(item, i) {
-        //     console.log(' ' + item); });
-        // });
+    client.lpush('tasks', 'Paint the bikeshed red.', redis.print);
+    client.lpush('tasks', 'Paint the bikeshed green.', redis.print);
 
-    console.log('TTT^^TTT');
+    client.lrange('tasks', 0, -1, function(err, items) {
+    if (err) throw err; items.forEach(function(item, i) {
+        console.log(' ' + item); });
+    });
+
     next();
 }
-
-module.exports = redisClient;
