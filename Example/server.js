@@ -10,4 +10,4 @@ http.createServer((req, res)=>{
     // fs.createReadStream('../source/xf_chen.jpeg').pipe(res);
 }).listen(4000);
 
-console.log('Server running in port 4000!');
+console.log(process.argv.splice(2), 'Server running in port 4000!');

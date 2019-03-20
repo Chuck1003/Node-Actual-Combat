@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/sweetalert.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./img/design.png" rel="icon">
+  </head>
+  <body>
+    <div id="App">
+      <h3><%= title %></h3>
+      <div class="mysql">
+          <button class="btn btn-success" @click="archivedWork">Archived Work</button>
+          <form action="javascript:;">
+              <legend>
+                <label>Date(YYYY-MM-DD)</label>
+                <input type="date" name="Date" v-model="date">
+              </legend>
+              <legend>
+                <label>Time(Hours)</label>
+                <input type="text" name="Time" v-model="time">
+              </legend>
+              <legend>
+                <label>Description</label>
+                <input type="text" name="Desc" v-model="desc">
+              </legend>
+              <button class="btn btn-primary" @click="addItem">Add Item</button>
+          </form>
+      </div>
+    </div>
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/sweetalert.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        let nVue = new Vue({
+          el: '#App',
+          data: {
+            date: '',
+            time: '',
+            desc: ''
+          },
+          created: function(){
+
+          },
+          methods: {
+            addItem(){
+              let self = this;
+              console.log('日期：'+ self.date, '时间：'+ self.time, '描述：'+ self.desc);
+            },
+            archivedWork(){
+
+            }
+          }
+        })
+    </script>
+  </body>
+</html>
